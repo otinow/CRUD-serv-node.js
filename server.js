@@ -10,20 +10,20 @@ app.use (cookieParser('СЕКРЕТНОЕ_СЛОВО_ДЛЯ_ПОДПИСИ')); /
 
 // Разрешение CORS для работы с куками в браузере
 app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', process.env.CORS_ORIGINS);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     next();
 });
 
-app.use('/auth', require('./routes/auth')); // Запросы пойдут на /auth/register, /auth/login
+app.use('/auth', require('./routes/auth.routes')); // Запросы пойдут на /auth/register, /auth/login
 //require('./routes/auth') заменяется на мини_роутер_авторизации) (router);
 //получается app.use('/auth', require(router))
 //require(router): "приложение, применяй модуль router"
 //'/auth' жесткий системный фильтр на все входящие из интернета запросы
 //если приходит запрос со слов /auth то всё что идёт после /auth нужно срезать и передать в router, сам /auth при этом не передаётся, только то что идёт после него, /auth это просто "направляющая" -куда идти-
 
-app.use('/tasks', require('./routes/tasks')); // Запросы пойдут на /tasks, /tasks/:id
+app.use('/tasks', require('./routes/tasks.routes')); // Запросы пойдут на /tasks, /tasks/:id
 
 app.listen(3000, () => console.log("Server activated in port 3000")); //заставляем сервер "слушать" 3000-й порт, выводим в консоль сообщение то что сервер активирован на порту 3000
