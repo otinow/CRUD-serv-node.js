@@ -3,12 +3,10 @@
 
 // Get a free hosted Postgres database in seconds: `npx create-db`
 
-// 1. Настройки генератора (без ручных путей output)
 generator client {
   provider = "prisma-client-js"
 }
 
-// 2. Блок базы данных (В Prisma 7 здесь оставляем ТОЛЬКО провайдер!)
 datasource db {
 	provider = "postgresql"
 }
